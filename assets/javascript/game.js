@@ -1,5 +1,3 @@
-
-
 $(document).ready(function(){
 	var wins=0;
 	var losses=0;
@@ -9,8 +7,8 @@ $(document).ready(function(){
 	function restartGame(){
 		var userScore=0;
 		var randomNumber=Math.floor(Math.random()*(120-19+1))+19;
+		var clickedButton;
 
-		if (userScore<randomNumber){
 			$("#randomNumber").html(randomNumber);
 			$("#wins").html(wins);
 			$("#losses").html(losses);
@@ -26,33 +24,36 @@ $(document).ready(function(){
 			$("#button3").val(button3);
 			$("#button4").val(button4);
 
-			console.log(button1);
-			console.log(button2);
-			console.log(button3);
-			console.log(button4);
+			// console.log(button1);
+			// console.log(button2);
+			// console.log(button3);
+			// console.log(button4);
 
 			$(".button").on("click", function(){
-				var clickedButton= this.value;
-				userScore= parseInt(userScore)+parseInt(clickedButton);
-				console.log(userScore);
+				console.log(button1);
+				console.log(button2);
+				console.log(button3);
+				console.log(button4);
+				clickedButton= $(this).val();
+				console.log("clicked button: " + clickedButton);
+				userScore=userScore+parseInt(clickedButton);
+				// console.log(userScore);
 				$("#userScore").html(userScore);
+
+				if (userScore===randomNumber){
+					wins++;
+					restartGame();
+				}
+
+				if (parseInt(userScore)>parseInt(randomNumber)){
+					losses++;
+					restartGame();
+				}
 			})
 
-		}
 
-		if (userScore===randomNumber){
-			wins++;
-			restartGame();
-			return;
-		}
-
-		if (userScore>randomNumber){
-			losses++;
-			$("#losses").html(losses);
-			restartGame();
-			return;
-		}
-
+			
+		
 		$("#randomNumber").html(randomNumber);
 		$("#wins").html(wins);
 		$("#losses").html(losses);
@@ -64,4 +65,3 @@ $(document).ready(function(){
 
 
 })
-
